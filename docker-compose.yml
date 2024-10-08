@@ -4,7 +4,7 @@ services:
       dockerfile: auth.Dockerfile
       context: .
       target: ${NODE_ENV}
-    container_name: auth-service
+    container_name: nodejs-json-converter-auth
     environment:
       AUTH_PORT: ${AUTH_PORT}
       LOG_LEVEL: ${LOG_LEVEL}
@@ -37,7 +37,7 @@ services:
       dockerfile: converter.Dockerfile
       context: .
       target: ${NODE_ENV}
-    container_name: converter-service
+    container_name: nodejs-json-converter-app
     environment:
       CONVERTER_PORT: ${CONVERTER_PORT}
       LOG_LEVEL: ${LOG_LEVEL}
