@@ -78,9 +78,9 @@ async function completeGithubAuth(req, reply) {
 			path: "/",
 			maxAge: 86400,
 			httpOnly: true,
-			sameSite: "Strict",
+			sameSite: "strict",
 		})
-		.redirect("/", 303);
+		.redirect("/");
 }
 
 export { redirectToGitHub, completeGithubAuth };

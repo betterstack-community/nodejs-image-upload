@@ -11,7 +11,9 @@ async function convertToYAML(req, reply) {
 		return reply.status(400).send("Invalid JSON input");
 	}
 
-	reply.send(stringify(body));
+	const yaml = stringify(body);
+
+	reply.send(yaml);
 }
 
 export { convertToYAML };

@@ -65,7 +65,7 @@ export default async function fastifyRoutes(fastify) {
 
 				await redisConn.deleteSessionToken(cookie);
 				reply
-					.clearCookie(sessionCookieKey, {
+					.clearCookie("sessionCookieKey", {
 						path: "/",
 						httpOnly: true,
 						expires: new Date(0),
@@ -74,6 +74,11 @@ export default async function fastifyRoutes(fastify) {
 			});
 
 			instance.get("/", (req, reply) => {
+				const cookie = req.cookies.sessionCookieKey;
+				if (cookie) {
+					return reply.redirect("/");
+				}
+
 				reply.render("auth");
 			});
 		},
