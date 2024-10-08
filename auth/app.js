@@ -39,7 +39,7 @@ await fastifyApp.register(fastifyCookie, {
 	hook: "onRequest",
 });
 await fastifyApp.register(fastifyReplyFrom, {
-	base: "http://converter-service:8001",
+	base: "http://nodejs-json-converter-app:8001",
 	contentTypesToEncode: ["application/x-www-form-urlencoded"],
 });
 await fastifyApp.register(fastifyFormbody);

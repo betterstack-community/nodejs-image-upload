@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-converter-upload",
+  "name": "nodejs-json-converter",
   "version": "1.0.0",
   "scripts": {
     "dev:auth": "nodemon auth/server.js",

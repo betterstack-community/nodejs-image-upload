@@ -6,17 +6,27 @@ import User from "../db/models/user.model.js";
 import redisConn from "../redis.js";
 
 async function requireAuth(req, reply) {
-	const cookie = req.cookies.sessionCookieKey;
-	if (!cookie) {
-		return reply.redirect("/auth");
-	}
+	try {
+		const cookie = req.cookies.sessionCookieKey;
+		if (!cookie) {
+			throw new Error("Session cookie not found");
+		}
 
-	const email = await redisConn.getSessionToken(cookie);
-	if (!email) {
-		return reply.redirect("/auth");
-	}
+		const email = await redisConn.getSessionToken(cookie);
+		if (!email) {
+			throw new Error("user not authenticated");
+		}
 
-	req.email = email;
+		req.email = email;
+	} catch (err) {
+		return reply
+			.clearCookie("sessionCookieKey", {
+				path: "/",
+				httpOnly: true,
+				expires: new Date(0),
+			})
+			.redirect("/auth");
+	}
 }
 
 export default async function fastifyRoutes(fastify) {
